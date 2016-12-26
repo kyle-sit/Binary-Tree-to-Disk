@@ -1,0 +1,109 @@
+/**************************************************************************** 
+
+																															Kyle Sit 
+																															CSE 12, Fall 
+																															3 December 2015 
+																															cs12xgj 
+																	Assignment Nine 
+
+	File Name:      Driver.h
+	Description:    This program contains the UCSDStudent class which are the
+									objects we insert into our binary tree.
+ ****************************************************************************/
+
+#ifndef DRIVER_H
+#define DRIVER_H
+
+#include <string.h>
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+class UCSDStudent {
+        friend ostream & operator << (ostream &, const UCSDStudent &);
+        char name[20];
+        long studentnum;
+public:
+
+/***************************************************************************
+% Routine Name : UCSDStudent
+% File :         Driver.h
+% 
+% Description : Constructor for the student object
+%
+% Parameters descriptions :
+% 
+% name               description
+% ------------------ ------------------------------------------------------
+% nm             The student name
+% sn             the student number
+***************************************************************************/
+	UCSDStudent (char * nm, long sn = 0) : studentnum (sn) {
+		memset (name, '\0', sizeof (name));
+		strcpy (name, nm);
+	}
+
+/***************************************************************************
+% Routine Name : UCSDStudent
+% File :         Driver.h
+% 
+% Description : Default constructor for the student object
+***************************************************************************/
+
+	UCSDStudent (void) : studentnum (0) {
+		memset (name, '\0', sizeof (name));
+	}
+
+/***************************************************************************
+% Routine Name : operator const char *
+% File :         Driver.h
+% 
+% Description : Getter for name
+***************************************************************************/
+	operator const char * (void) const{
+		return name;
+	}
+
+/***************************************************************************
+% Routine Name : UCSDStudent
+% File :         Driver.h
+% 
+% Description : Copy constructor for the student object
+%
+% Parameters descriptions :
+% 
+% name               description
+% ------------------ ------------------------------------------------------
+% stu								 Reference to the UCSDStudent object to be copied
+***************************************************************************/
+        UCSDStudent (const UCSDStudent & stu) {
+                memset (name, '\0', sizeof (name));
+								strcpy (name, stu.name);
+								studentnum = stu.studentnum;
+        }
+
+/***************************************************************************
+% Routine Name : ==
+% File :         Driver.h
+% 
+% Description : equals operator
+%
+***************************************************************************/
+	long operator == (const UCSDStudent & stu) const {
+		return ! strcmp (name, stu.name);
+	}	
+
+/***************************************************************************
+% Routine Name : <
+% File :         Driver.h
+% 
+% Description : Less than operator
+
+***************************************************************************/
+	long operator < (const UCSDStudent & stu) const {
+		return (strcmp (name, stu.name) < 0) ? 1 : 0;
+	}  
+
+};
+
+#endif
